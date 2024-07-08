@@ -1,0 +1,45 @@
+version: "3"
+
+vars:
+  GREETING: ""
+
+tasks:
+  tout_create_container_Db:
+    cmds:
+      - "cd EstocariaNet/docker compose up -d"
+    silent: true
+
+  t1_run_backend:
+    cmds:
+      - "cd EstocariaNet/ && dotnet restore && docker compose start && dotnet run"
+    silent: true
+    
+  t4_stop_containers:
+    cmds:
+      - "docker stop $(docker ps -a -q)"
+    silent: true
+
+  t5_remover_containers:
+    cmds:
+      - "docker rm $(docker ps -a -q)"
+    silent: true
+
+  t6_remover_images:
+    cmds:
+      - "docker rmi $(docker images -q)"
+    silent: true
+
+  t7_parar_apps:
+    cmds:
+      - npm install -g kill-port
+      - npx kill-port 3003
+      - npx kill-port 3000
+      - npx kill-port 8081
+      - npx kill-port 5017
+
+  t8_limpar:
+    cmds:
+      - mkdir -p tmpdir/
+      - defer: rm -rf tmpdir/
+      - echo 'Do work on tmpdir/'
+
