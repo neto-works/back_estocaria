@@ -11,7 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using EstocariaNet.Models;
 using Microsoft.OpenApi.Models;
-using EstocariaNet.Shared.Swagger;
+// using EstocariaNet.Shared.Swagger;
 
 var builder = WebApplication.CreateBuilder(args);
 var secretKey = builder.Configuration["JWT:SecretKey"] ?? throw new ArgumentException("Invalid secretkey");
@@ -66,8 +66,9 @@ builder.Services.AddAuthorization(options =>
 
 // add policy cors
 var OriginAcess = "_originAcessAllowed";
-builder.Services.AddCors(options =>{
-    options.AddPolicy(name: OriginAcess, policy =>{policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();});
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: OriginAcess, policy => { policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader(); });
 });
 
 builder.Services.AddEndpointsApiExplorer();
@@ -98,12 +99,7 @@ builder.Services.AddSwaggerGen(c =>
                          new string[] {}
                     }
                 });
-    c.DocumentFilter<FilterSwagger>(new List<Type> {
-        // typeof(CreateAdminDTO),typeof(LoginDTO),typeof(UpdateAdminDTO),typeof(TokenDTO),typeof(RegistroDTO),
-        // typeof(DataComaparableDTO),typeof(CreateRelatorioDTO),typeof(CreateProdutoDTO),typeof(CreateCategoriaDTO),
-        // typeof(UpdateEstoquistaDTO),typeof(CreateLancamentoDTO),typeof(TipoUsuarioEnum),typeof(UpdateEstoqueDTO),
-        // typeof(UpdateProdutoDTO),typeof(UpdateProdutoDTO),
-        });
+    // c.DocumentFilter<FilterSwagger>(new List<Type> {typeof(CreateAdminDTO),typeof(LoginDTO),typeof(UpdateAdminDTO),typeof(TokenDTO),typeof(RegistroDTO)});
 });
 
 //register context

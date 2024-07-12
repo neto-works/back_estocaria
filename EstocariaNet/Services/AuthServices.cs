@@ -15,7 +15,6 @@ namespace EstocariaNet.Services
         private readonly IConfiguration _configuration;
         private readonly UserManager<AplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-
         private readonly IEstoquistaServices _estoquistaService;
         private readonly IAdminServices _adminService;
         public AuthServices(ITokenServices tokenServices, UserManager<AplicationUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration, IEstoquistaServices estoquistaService, IAdminServices adminService)
@@ -75,6 +74,7 @@ namespace EstocariaNet.Services
                 UserName = model.UserName,
                 TipoUsuario = ParseEnum<TipoUsuarioEnum>(model.TipoUsuario!),
             };
+            ////Note this method uses referenced value, if user to user created successfully will have received the bank id, facilitating use
             var result = await _userManager.CreateAsync(user, model.Password!);
 
             if (!result.Succeeded)
@@ -86,24 +86,21 @@ namespace EstocariaNet.Services
                 case TipoUsuarioEnum.ADMIN:
                     var adminSalvo = await _adminService.AdicionarAsync(new CreateAdminDTO { Setor = "Administrativo", AplicationUserId = user.Id });
                     role = await _roleManager.FindByNameAsync("Administrar");
-                    var usuarioAtualizar = await _userManager.FindByIdAsync(user.Id);
-                    usuarioAtualizar!.IdAdmin = user.Id;
-                    _ = await _userManager.UpdateAsync(usuarioAtualizar);
+                    user!.Admin = adminSalvo;
+                    _ = await _userManager.UpdateAsync(user);
 
                     if (role is null)
                     {
                         roleCriada = await CreateRole("Administrar");
                     }
-                    _= await AddRoleForUser(model.Email!, "Administrar");
+                    _ = await AddRoleForUser(model.Email!, "Administrar");
                     break;
 
                 case TipoUsuarioEnum.ESTOQUISTA:
                     var estoquistaSalvo = await _estoquistaService.AdicionarAsync(new CreateEstoquistaDTO { AplicationUserId = user.Id, EstoqueId = null, Cpf = "", Celular = "" });
                     role = await _roleManager.FindByNameAsync("Estocar");
-                    var usuarioEstoquistaAtualizar = await _userManager.FindByIdAsync(user.Id);
-                    usuarioEstoquistaAtualizar!.IdEstoquista = user.Id;
-                    _= await _userManager.UpdateAsync(usuarioEstoquistaAtualizar);
-
+                    user!.Estoquista = estoquistaSalvo;
+                    _ = await _userManager.UpdateAsync(user);
                     if (role is null)
                     {
                         roleCriada = await CreateRole("Estocar");

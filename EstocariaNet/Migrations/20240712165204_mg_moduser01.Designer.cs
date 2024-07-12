@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EstocariaNet.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240708133911_mg_atttypeUsers")]
-    partial class mg_atttypeUsers
+    [Migration("20240712165204_mg_moduser01")]
+    partial class mg_moduser01
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -69,12 +69,6 @@ namespace EstocariaNet.Migrations
 
                     b.Property<string>("EstoquistaId")
                         .HasColumnType("varchar(255)");
-
-                    b.Property<string>("IdAdmin")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("IdEstoquista")
-                        .HasColumnType("longtext");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("tinyint(1)");

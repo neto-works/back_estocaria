@@ -67,12 +67,6 @@ namespace EstocariaNet.Migrations
                     b.Property<string>("EstoquistaId")
                         .HasColumnType("varchar(255)");
 
-                    b.Property<string>("IdAdmin")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("IdEstoquista")
-                        .HasColumnType("longtext");
-
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("tinyint(1)");
 

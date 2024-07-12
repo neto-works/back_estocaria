@@ -12,12 +12,13 @@ namespace EstocariaNet.Models
 
         public TipoUsuarioEnum? TipoUsuario { get; set; }
 
-        public string? IdAdmin { get; set; }
+
+        public string? AdminId { get; set; }
 
         public Admin? Admin { get; set; }
 
-        public string? IdEstoquista { get; set; }
-        
+        public string? EstoquistaId { get; set; }
+
         public Estoquista? Estoquista { get; set; }
     }
 }

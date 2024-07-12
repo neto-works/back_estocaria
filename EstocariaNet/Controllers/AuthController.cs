@@ -43,7 +43,7 @@ namespace EstocariaNet.Controllers
 
                 if (responseCode.Status == "Error")
                 {
-                    return StatusCode(StatusCodes.Status500InternalServerError, responseCode);
+                    return Conflict(responseCode);
                 }
                 return Ok(responseCode);
             }
