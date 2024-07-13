@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EstocariaNet.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240712165204_mg_moduser01")]
-    partial class mg_moduser01
+    [Migration("20240713194221_mg_users")]
+    partial class mg_users
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,6 +43,13 @@ namespace EstocariaNet.Migrations
                     b.HasIndex("AplicationUserAdminId");
 
                     b.ToTable("Admins");
+
+                    b.HasData(
+                        new
+                        {
+                            AdminId = "AdminId",
+                            Setor = "Vargas"
+                        });
                 });
 
             modelBuilder.Entity("EstocariaNet.Models.AplicationUser", b =>
@@ -126,6 +133,44 @@ namespace EstocariaNet.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "usuarioEstoquistaRaiz",
+                            AccessFailedCount = 0,
+                            Email = "estoquista@gmail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            LockoutEnd = new DateTimeOffset(new DateTime(2045, 12, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, -3, 0, 0, 0)),
+                            NormalizedEmail = "ESTOQUISTA@GMAIL.COM",
+                            NormalizedUserName = "ESTOQUISTA",
+                            PasswordHash = "",
+                            PhoneNumber = "9981998199",
+                            PhoneNumberConfirmed = true,
+                            RefreshTokenExpiryTime = new DateTime(2045, 12, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TipoUsuario = 0,
+                            TwoFactorEnabled = false,
+                            UserName = "Estoquista"
+                        },
+                        new
+                        {
+                            Id = "usuarioAdminRaiz",
+                            AccessFailedCount = 0,
+                            Email = "Admins@gmail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            LockoutEnd = new DateTimeOffset(new DateTime(2045, 12, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, -3, 0, 0, 0)),
+                            NormalizedEmail = "ADMIN@GMAIL.COM",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "",
+                            PhoneNumber = "9981998199",
+                            PhoneNumberConfirmed = true,
+                            RefreshTokenExpiryTime = new DateTime(2045, 12, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TipoUsuario = 0,
+                            TwoFactorEnabled = false,
+                            UserName = "Admin"
+                        });
                 });
 
             modelBuilder.Entity("EstocariaNet.Models.Categoria", b =>
@@ -144,6 +189,18 @@ namespace EstocariaNet.Migrations
                     b.HasKey("CategoriaId");
 
                     b.ToTable("Categorias");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoriaId = 1,
+                            Nome = "Grãos"
+                        },
+                        new
+                        {
+                            CategoriaId = 2,
+                            Nome = "Em pó"
+                        });
                 });
 
             modelBuilder.Entity("EstocariaNet.Models.Estoque", b =>
@@ -181,6 +238,24 @@ namespace EstocariaNet.Migrations
                     b.HasIndex("LinkAdminAdminId");
 
                     b.ToTable("Estoques");
+
+                    b.HasData(
+                        new
+                        {
+                            EstoqueId = 1,
+                            Capacidade = 1150.5f,
+                            DataCriacao = new DateTime(2024, 7, 13, 16, 42, 20, 902, DateTimeKind.Local).AddTicks(1560),
+                            Local = "Vale dos cangurus",
+                            Nome = "EST - Comestíveis SA"
+                        },
+                        new
+                        {
+                            EstoqueId = 2,
+                            Capacidade = 1650.5f,
+                            DataCriacao = new DateTime(2024, 7, 13, 16, 42, 20, 902, DateTimeKind.Local).AddTicks(1560),
+                            Local = "Vale dos cangurus",
+                            Nome = "EST - Prod Limpeza SA"
+                        });
                 });
 
             modelBuilder.Entity("EstocariaNet.Models.Estoquista", b =>
@@ -219,6 +294,15 @@ namespace EstocariaNet.Migrations
                     b.HasIndex("EstoquistaEstoqueId");
 
                     b.ToTable("Estoquistas");
+
+                    b.HasData(
+                        new
+                        {
+                            EstoquistaId = "EstoquistaIdRaiz",
+                            Celular = "567456546",
+                            Cpf = "11800909862",
+                            DataInicio = new DateTime(2024, 7, 13, 16, 42, 20, 902, DateTimeKind.Local).AddTicks(1560)
+                        });
                 });
 
             modelBuilder.Entity("EstocariaNet.Models.Lancamento", b =>
@@ -259,6 +343,242 @@ namespace EstocariaNet.Migrations
                     b.HasIndex("ProdutoId");
 
                     b.ToTable("Lancamentos");
+
+                    b.HasData(
+                        new
+                        {
+                            LancamentoId = 1,
+                            Data = new DateTime(2024, 7, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EstoquistaId = "EstoquistaIdRaiz",
+                            ProdutoId = 1,
+                            QuantEntrada = 18f,
+                            QuantSaida = 20f
+                        },
+                        new
+                        {
+                            LancamentoId = 2,
+                            Data = new DateTime(2024, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EstoquistaId = "EstoquistaIdRaiz",
+                            ProdutoId = 5,
+                            QuantEntrada = 56f,
+                            QuantSaida = 12f
+                        },
+                        new
+                        {
+                            LancamentoId = 3,
+                            Data = new DateTime(2024, 7, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EstoquistaId = "EstoquistaIdRaiz",
+                            ProdutoId = 1,
+                            QuantEntrada = 54f,
+                            QuantSaida = 4f
+                        },
+                        new
+                        {
+                            LancamentoId = 4,
+                            Data = new DateTime(2024, 7, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EstoquistaId = "EstoquistaIdRaiz",
+                            ProdutoId = 5,
+                            QuantEntrada = 66f,
+                            QuantSaida = 3f
+                        },
+                        new
+                        {
+                            LancamentoId = 5,
+                            Data = new DateTime(2024, 9, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EstoquistaId = "EstoquistaIdRaiz",
+                            ProdutoId = 3,
+                            QuantEntrada = 47f,
+                            QuantSaida = 3f
+                        },
+                        new
+                        {
+                            LancamentoId = 6,
+                            Data = new DateTime(2024, 7, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EstoquistaId = "EstoquistaIdRaiz",
+                            ProdutoId = 5,
+                            QuantEntrada = 60f,
+                            QuantSaida = 1f
+                        },
+                        new
+                        {
+                            LancamentoId = 7,
+                            Data = new DateTime(2024, 7, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EstoquistaId = "EstoquistaIdRaiz",
+                            ProdutoId = 4,
+                            QuantEntrada = 36f,
+                            QuantSaida = 20f
+                        },
+                        new
+                        {
+                            LancamentoId = 8,
+                            Data = new DateTime(2024, 7, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EstoquistaId = "EstoquistaIdRaiz",
+                            ProdutoId = 3,
+                            QuantEntrada = 79f,
+                            QuantSaida = 28f
+                        },
+                        new
+                        {
+                            LancamentoId = 9,
+                            Data = new DateTime(2024, 9, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EstoquistaId = "EstoquistaIdRaiz",
+                            ProdutoId = 4,
+                            QuantEntrada = 36f,
+                            QuantSaida = 24f
+                        },
+                        new
+                        {
+                            LancamentoId = 10,
+                            Data = new DateTime(2024, 9, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EstoquistaId = "EstoquistaIdRaiz",
+                            ProdutoId = 4,
+                            QuantEntrada = 13f,
+                            QuantSaida = 9f
+                        },
+                        new
+                        {
+                            LancamentoId = 11,
+                            Data = new DateTime(2024, 9, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EstoquistaId = "EstoquistaIdRaiz",
+                            ProdutoId = 2,
+                            QuantEntrada = 19f,
+                            QuantSaida = 5f
+                        },
+                        new
+                        {
+                            LancamentoId = 12,
+                            Data = new DateTime(2024, 7, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EstoquistaId = "EstoquistaIdRaiz",
+                            ProdutoId = 3,
+                            QuantEntrada = 34f,
+                            QuantSaida = 4f
+                        },
+                        new
+                        {
+                            LancamentoId = 13,
+                            Data = new DateTime(2024, 9, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EstoquistaId = "EstoquistaIdRaiz",
+                            ProdutoId = 1,
+                            QuantEntrada = 10f,
+                            QuantSaida = 7f
+                        },
+                        new
+                        {
+                            LancamentoId = 14,
+                            Data = new DateTime(2024, 7, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EstoquistaId = "EstoquistaIdRaiz",
+                            ProdutoId = 5,
+                            QuantEntrada = 12f,
+                            QuantSaida = 16f
+                        },
+                        new
+                        {
+                            LancamentoId = 15,
+                            Data = new DateTime(2024, 7, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EstoquistaId = "EstoquistaIdRaiz",
+                            ProdutoId = 3,
+                            QuantEntrada = 59f,
+                            QuantSaida = 11f
+                        },
+                        new
+                        {
+                            LancamentoId = 16,
+                            Data = new DateTime(2024, 7, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EstoquistaId = "EstoquistaIdRaiz",
+                            ProdutoId = 4,
+                            QuantEntrada = 21f,
+                            QuantSaida = 10f
+                        },
+                        new
+                        {
+                            LancamentoId = 17,
+                            Data = new DateTime(2024, 7, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EstoquistaId = "EstoquistaIdRaiz",
+                            ProdutoId = 1,
+                            QuantEntrada = 26f,
+                            QuantSaida = 20f
+                        },
+                        new
+                        {
+                            LancamentoId = 18,
+                            Data = new DateTime(2024, 7, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EstoquistaId = "EstoquistaIdRaiz",
+                            ProdutoId = 5,
+                            QuantEntrada = 76f,
+                            QuantSaida = 9f
+                        },
+                        new
+                        {
+                            LancamentoId = 19,
+                            Data = new DateTime(2024, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EstoquistaId = "EstoquistaIdRaiz",
+                            ProdutoId = 1,
+                            QuantEntrada = 68f,
+                            QuantSaida = 20f
+                        },
+                        new
+                        {
+                            LancamentoId = 20,
+                            Data = new DateTime(2024, 8, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EstoquistaId = "EstoquistaIdRaiz",
+                            ProdutoId = 3,
+                            QuantEntrada = 13f,
+                            QuantSaida = 20f
+                        },
+                        new
+                        {
+                            LancamentoId = 21,
+                            Data = new DateTime(2024, 8, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EstoquistaId = "EstoquistaIdRaiz",
+                            ProdutoId = 1,
+                            QuantEntrada = 19f,
+                            QuantSaida = 4f
+                        },
+                        new
+                        {
+                            LancamentoId = 22,
+                            Data = new DateTime(2024, 8, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EstoquistaId = "EstoquistaIdRaiz",
+                            ProdutoId = 2,
+                            QuantEntrada = 80f,
+                            QuantSaida = 22f
+                        },
+                        new
+                        {
+                            LancamentoId = 23,
+                            Data = new DateTime(2024, 8, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EstoquistaId = "EstoquistaIdRaiz",
+                            ProdutoId = 2,
+                            QuantEntrada = 27f,
+                            QuantSaida = 18f
+                        },
+                        new
+                        {
+                            LancamentoId = 24,
+                            Data = new DateTime(2024, 8, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EstoquistaId = "EstoquistaIdRaiz",
+                            ProdutoId = 1,
+                            QuantEntrada = 56f,
+                            QuantSaida = 28f
+                        },
+                        new
+                        {
+                            LancamentoId = 25,
+                            Data = new DateTime(2024, 8, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EstoquistaId = "EstoquistaIdRaiz",
+                            ProdutoId = 2,
+                            QuantEntrada = 66f,
+                            QuantSaida = 25f
+                        },
+                        new
+                        {
+                            LancamentoId = 26,
+                            Data = new DateTime(2024, 8, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EstoquistaId = "EstoquistaIdRaiz",
+                            ProdutoId = 2,
+                            QuantEntrada = 32f,
+                            QuantSaida = 14f
+                        });
                 });
 
             modelBuilder.Entity("EstocariaNet.Models.Produto", b =>
@@ -313,6 +633,78 @@ namespace EstocariaNet.Migrations
                     b.HasIndex("EstoqueId");
 
                     b.ToTable("Produtos");
+
+                    b.HasData(
+                        new
+                        {
+                            ProdutoId = 1,
+                            CategoriaId = 1,
+                            DataCadastro = new DateTime(2024, 7, 13, 16, 42, 20, 902, DateTimeKind.Local).AddTicks(1560),
+                            Descricao = "É o arroz descascado",
+                            EstoqueId = 1,
+                            ImagemUrl = "algumaimagem.png",
+                            Nome = "Arroz Integral",
+                            Preco = 6.4m,
+                            QuantEstoqueMax = 250f,
+                            QuantEstoqueMin = 0f,
+                            Saldo = 0f
+                        },
+                        new
+                        {
+                            ProdutoId = 2,
+                            CategoriaId = 1,
+                            DataCadastro = new DateTime(2024, 7, 13, 16, 42, 20, 902, DateTimeKind.Local).AddTicks(1560),
+                            Descricao = "Variedade do feijão comum",
+                            EstoqueId = 1,
+                            ImagemUrl = "algumaimagem.png",
+                            Nome = "Feijão carioca",
+                            Preco = 6.4m,
+                            QuantEstoqueMax = 250f,
+                            QuantEstoqueMin = 0f,
+                            Saldo = 0f
+                        },
+                        new
+                        {
+                            ProdutoId = 3,
+                            CategoriaId = 2,
+                            DataCadastro = new DateTime(2024, 7, 13, 16, 42, 20, 902, DateTimeKind.Local).AddTicks(1560),
+                            Descricao = "Farinha de mandioca",
+                            EstoqueId = 1,
+                            ImagemUrl = "algumaimagem.png",
+                            Nome = "Farinha Granfind",
+                            Preco = 6.4m,
+                            QuantEstoqueMax = 250f,
+                            QuantEstoqueMin = 0f,
+                            Saldo = 0f
+                        },
+                        new
+                        {
+                            ProdutoId = 4,
+                            CategoriaId = 2,
+                            DataCadastro = new DateTime(2024, 7, 13, 16, 42, 20, 902, DateTimeKind.Local).AddTicks(1560),
+                            Descricao = "Café produzido em Caicó",
+                            EstoqueId = 1,
+                            ImagemUrl = "algumaimagem.png",
+                            Nome = "Café Itans",
+                            Preco = 6.4m,
+                            QuantEstoqueMax = 250f,
+                            QuantEstoqueMin = 0f,
+                            Saldo = 0f
+                        },
+                        new
+                        {
+                            ProdutoId = 5,
+                            CategoriaId = 2,
+                            DataCadastro = new DateTime(2024, 7, 13, 16, 42, 20, 902, DateTimeKind.Local).AddTicks(1560),
+                            Descricao = "Açúcar refinado e cristalino",
+                            EstoqueId = 1,
+                            ImagemUrl = "algumaimagem.png",
+                            Nome = "Açúcar Cristal",
+                            Preco = 6.4m,
+                            QuantEstoqueMax = 250f,
+                            QuantEstoqueMin = 0f,
+                            Saldo = 0f
+                        });
                 });
 
             modelBuilder.Entity("EstocariaNet.Models.Relatorio", b =>
